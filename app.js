@@ -24,9 +24,7 @@ const startOverlay = document.getElementById("startOverlay");
 const nextBtn = document.getElementById("nextBtn");
 const revealBtn = document.getElementById("revealBtn");
 const hiddenState = document.getElementById("hiddenState");
-const revealedState = document.getElementById("revealedState");
 const videoTitleDisplay = document.getElementById("videoTitleDisplay");
-const mysterySubtitle = document.getElementById("mysterySubtitle");
 const themeGroup = document.getElementById("themeGroup");
 const detailSlider = document.getElementById("detailSlider");
 const detailVal = document.getElementById("detailVal");
@@ -48,7 +46,6 @@ let currentTheme = "color";
 let targetColumns = 180;
 let clarityUnderlay = 0.35;
 let isPlaying = false;
-let isRevealed = false;
 let animFrameId = null;
 
 // Initialize
@@ -66,11 +63,7 @@ function loadRandomVideo() {
   currentVideoIndex = nextIndex;
   const current = VIDEO_PLAYLIST[currentVideoIndex];
 
-  // Reset Mystery UI
-  isRevealed = false;
-  hiddenState.style.display = "flex";
-  revealedState.style.display = "none";
-  mysterySubtitle.innerHTML = `🎲 Mystery Video <span>#${currentVideoIndex + 1}</span>`;
+  // Show title directly
   videoTitleDisplay.textContent = current.title;
 
   // Load Video source
@@ -99,13 +92,6 @@ function setupEventListeners() {
   // Next Video
   nextBtn.addEventListener("click", () => {
     loadRandomVideo();
-  });
-
-  // Reveal Answer
-  revealBtn.addEventListener("click", () => {
-    isRevealed = true;
-    hiddenState.style.display = "none";
-    revealedState.style.display = "flex";
   });
 
   // Theme selection
@@ -166,10 +152,6 @@ function setupEventListeners() {
     video.src = fileUrl;
     video.load();
 
-    isRevealed = true;
-    hiddenState.style.display = "none";
-    revealedState.style.display = "flex";
-    mysterySubtitle.innerHTML = `📁 Custom Video`;
     videoTitleDisplay.textContent = file.name;
 
     video.play().then(() => {
