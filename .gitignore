@@ -1,0 +1,6 @@
+venv/
+ascii_video_silent.mp4
+ascii_hacker_animation.mp4
+*.pyc
+__pycache__/
+.DS_Store

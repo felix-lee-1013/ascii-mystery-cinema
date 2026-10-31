@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ASCII Mystery Cinema 🎬</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="cyber-badge">CYBER-ASCII</span>
+        <h1>Mystery Cinema</h1>
+      </div>
+      <div class="header-actions">
+        <label for="videoUpload" class="icon-btn upload-btn" title="Upload Video">
+          📁 <span>Custom Video</span>
+          <input type="file" id="videoUpload" accept="video/*" hidden>
+        </label>
+      </div>
+    </header>
+
+    <!-- Main Screen / Player Area -->
+    <main class="player-wrapper">
+      <div class="canvas-container" id="canvasContainer">
+        <canvas id="asciiCanvas"></canvas>
+        <video id="videoElement" playsinline loop crossorigin="anonymous"></video>
+        
+        <!-- Big Tap to Play Overlay (Ensures Audio Starts Unmuted on Mobile) -->
+        <div class="overlay-start" id="startOverlay">
+          <div class="start-card">
+            <div class="start-icon">▶</div>
+            <h2>Tap to Enter Mystery Cinema</h2>
+            <p>Ready with full color & synchronized sound</p>
+          </div>
+        </div>
+
+        <!-- Video HUD Status -->
+        <div class="hud-status" id="hudStatus">
+          <span class="live-dot"></span> LIVE ASCII MATRIX
+        </div>
+      </div>
+
+      <!-- Mystery Guess & Reveal Card -->
+      <section class="mystery-card">
+        <div class="mystery-header">
+          <div class="mystery-title-wrap">
+            <span class="mystery-label">GAME MODE</span>
+            <h3 id="mysterySubtitle">🎲 Mystery Video <span id="mysteryIndex">#1</span></h3>
+          </div>
+          <button id="nextBtn" class="primary-btn pulse-glow">🎲 Next Random</button>
+        </div>
+
+        <div class="reveal-box" id="revealBox">
+          <div class="hidden-state" id="hiddenState">
+            <p>Can you guess who or what is in this video?</p>
+            <button id="revealBtn" class="reveal-trigger-btn">👁️ Reveal Answer</button>
+          </div>
+          <div class="revealed-state" id="revealedState" style="display: none;">
+            <span class="revealed-tag">🎉 IT'S:</span>
+            <h2 id="videoTitleDisplay" class="revealed-title">Title Here</h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- Control Deck -->
+      <section class="controls-deck">
+        <!-- Theme Selector -->
+        <div class="control-row">
+          <span class="control-label">STYLE:</span>
+          <div class="pill-group" id="themeGroup">
+            <button class="pill active" data-theme="color">🎨 True Color</button>
+            <button class="pill" data-theme="cyan">💎 Cyan Glow</button>
+            <button class="pill" data-theme="matrix">🟢 Matrix</button>
+            <button class="pill" data-theme="sunset">🟣 Neon Pink</button>
+          </div>
+        </div>
+
+        <!-- Detail / Resolution Slider -->
+        <div class="control-row slider-row">
+          <div class="slider-header">
+            <span class="control-label">GRID DETAIL:</span>
+            <span class="slider-val" id="detailVal">High (180 cols)</span>
+          </div>
+          <input type="range" id="detailSlider" min="90" max="240" step="30" value="180">
+        </div>
+
+        <!-- Video Underlay Opacity (Clarity) -->
+        <div class="control-row slider-row">
+          <div class="slider-header">
+            <span class="control-label">CLARITY UNDERLAY:</span>
+            <span class="slider-val" id="clarityVal">35%</span>
+          </div>
+          <input type="range" id="claritySlider" min="0" max="70" step="5" value="35">
+        </div>
+
+        <!-- Playback Controls -->
+        <div class="playback-bar">
+          <button id="playPauseBtn" class="ctrl-btn">⏸ Pause</button>
+          <button id="muteBtn" class="ctrl-btn">🔊 Sound On</button>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" class="vol-slider">
+          <button id="fullscreenBtn" class="ctrl-btn icon-only" title="Fullscreen">⛶</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Works smoothly on Android, iPhone, Windows & Mac. Powered by HTML5 Canvas & Web Audio.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
